@@ -22,7 +22,7 @@ import java.util.UUID;
 @Service
 public class IssueService {
 
-    private static final String UPLOAD_DIR = "uploads/";
+    private static final String UPLOAD_DIR = "/app/uploads/";
 
     @Autowired
     private IssueRepository issueRepository;
@@ -189,7 +189,7 @@ public class IssueService {
         }
 
         // Create uploads directory if it doesn't exist
-        Path uploadDir = Paths.get("uploads");
+        Path uploadDir = Paths.get("/app/uploads");
         if (!Files.exists(uploadDir)) {
             Files.createDirectories(uploadDir);
             System.out.println("✅ Created uploads directory: " + uploadDir.toAbsolutePath());

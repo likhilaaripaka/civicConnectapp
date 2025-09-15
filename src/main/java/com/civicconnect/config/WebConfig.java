@@ -19,7 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // Serve uploaded files from uploads directory - public access
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:./uploads/", "file:uploads/")
+                .addResourceLocations("file:/app/uploads/")
                 .setCachePeriod(0); // Disable caching for development
         
         // Serve static resources
