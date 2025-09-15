@@ -21,10 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Serve uploaded files from configurable uploads directory - public access
-        registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:" + uploadDir + "/")
-                .setCachePeriod(0); // Disable caching for development
+        // Note: /uploads/** is now handled by FileServeController for in-memory storage
         
         // Serve static resources
         registry.addResourceHandler("/static/**")
