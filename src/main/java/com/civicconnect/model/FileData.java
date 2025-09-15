@@ -20,6 +20,7 @@ public class FileData {
     private Long fileSize;
     
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     @Column(nullable = false, columnDefinition = "BYTEA")
     private byte[] data;
     

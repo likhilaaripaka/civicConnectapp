@@ -1,8 +1,6 @@
 package com.civicconnect.service;
 
-import com.civicconnect.model.FileData;
-import com.civicconnect.repository.FileDataRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.civicconnect.controller.FileServeController;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,9 +9,6 @@ import java.util.UUID;
 
 @Service
 public class FileStorageService {
-
-    @Autowired
-    private FileDataRepository fileDataRepository;
 
     public String saveFile(MultipartFile file) throws IOException {
         if (file.isEmpty()) {
@@ -38,16 +33,10 @@ public class FileStorageService {
         String uniqueFilename = System.currentTimeMillis() + "_" + UUID.randomUUID().toString() + fileExtension;
 
         try {
-            // Save file data to database
-            FileData fileData = new FileData(
-                uniqueFilename,
-                file.getContentType(),
-                file.getSize(),
-                file.getBytes()
-            );
+            // Store file in memory for immediate access
+            FileServeController.storeFile(uniqueFilename, file.getContentType(), file.getBytes());
             
-            fileDataRepository.save(fileData);
-            System.out.println("✅ File saved to database successfully:");
+            System.out.println("✅ File saved to memory successfully:");
             System.out.println("- Original: " + originalFilename);
             System.out.println("- Saved as: " + uniqueFilename);
             System.out.println("- Size: " + file.getSize() + " bytes");
@@ -66,13 +55,8 @@ public class FileStorageService {
         }
 
         try {
-            fileDataRepository.findByFilename(filename).ifPresentOrElse(
-                fileData -> {
-                    fileDataRepository.delete(fileData);
-                    System.out.println("✅ File deleted from database successfully: " + filename);
-                },
-                () -> System.out.println("⚠️ File not found in database for deletion: " + filename)
-            );
+            // For now, we'll just log the deletion request since files are in memory
+            System.out.println("⚠️ File deletion requested for: " + filename);
             return true;
         } catch (Exception ex) {
             System.err.println("❌ Could not delete file " + filename + ". Error: " + ex.getMessage());
