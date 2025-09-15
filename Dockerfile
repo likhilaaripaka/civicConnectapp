@@ -1,5 +1,5 @@
 # Multi-stage build for optimized production image
-FROM maven:3.9.6-openjdk-17-slim AS build
+FROM maven:3.9.6-eclipse-temurin-17-alpine AS build
 
 # Set working directory
 WORKDIR /app
@@ -13,16 +13,16 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Production stage
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jre-alpine
 
 # Install curl for health checks
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache curl
 
 # Set working directory
 WORKDIR /app
 
 # Create non-root user for security
-RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN addgroup -g 1001 -S appuser && adduser -u 1001 -S appuser -G appuser
 
 # Create uploads directory with proper permissions
 RUN mkdir -p uploads && chown -R appuser:appuser uploads
