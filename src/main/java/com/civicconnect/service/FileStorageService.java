@@ -1,33 +1,24 @@
 package com.civicconnect.service;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.civicconnect.model.FileData;
+import com.civicconnect.repository.FileDataRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
 @Service
 public class FileStorageService {
 
-    @Value("${app.upload.dir:/tmp/uploads}")
-    private String uploadDir;
+    @Autowired
+    private FileDataRepository fileDataRepository;
 
     public String saveFile(MultipartFile file) throws IOException {
         if (file.isEmpty()) {
             System.out.println("❌ File is empty, not saving");
             return null;
-        }
-
-        // Create uploads directory if it doesn't exist
-        Path uploadPath = Paths.get(uploadDir);
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
-            System.out.println("✅ Created uploads directory: " + uploadPath.toAbsolutePath());
         }
 
         // Generate unique filename
@@ -45,14 +36,23 @@ public class FileStorageService {
         }
         
         String uniqueFilename = System.currentTimeMillis() + "_" + UUID.randomUUID().toString() + fileExtension;
-        Path targetLocation = uploadPath.resolve(uniqueFilename);
 
         try {
-            // Copy file to target location
-            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("✅ File saved successfully: " + targetLocation.toAbsolutePath());
+            // Save file data to database
+            FileData fileData = new FileData(
+                uniqueFilename,
+                file.getContentType(),
+                file.getSize(),
+                file.getBytes()
+            );
             
-            // Return just the filename for database storage
+            fileDataRepository.save(fileData);
+            System.out.println("✅ File saved to database successfully:");
+            System.out.println("- Original: " + originalFilename);
+            System.out.println("- Saved as: " + uniqueFilename);
+            System.out.println("- Size: " + file.getSize() + " bytes");
+            System.out.println("- Content Type: " + file.getContentType());
+            
             return uniqueFilename;
         } catch (IOException ex) {
             System.err.println("❌ Could not store file " + uniqueFilename + ". Error: " + ex.getMessage());
@@ -66,21 +66,17 @@ public class FileStorageService {
         }
 
         try {
-            Path filePath = Paths.get(uploadDir).resolve(filename);
-            boolean deleted = Files.deleteIfExists(filePath);
-            if (deleted) {
-                System.out.println("✅ File deleted successfully: " + filename);
-            } else {
-                System.out.println("⚠️ File not found for deletion: " + filename);
-            }
-            return deleted;
-        } catch (IOException ex) {
+            fileDataRepository.findByFilename(filename).ifPresentOrElse(
+                fileData -> {
+                    fileDataRepository.delete(fileData);
+                    System.out.println("✅ File deleted from database successfully: " + filename);
+                },
+                () -> System.out.println("⚠️ File not found in database for deletion: " + filename)
+            );
+            return true;
+        } catch (Exception ex) {
             System.err.println("❌ Could not delete file " + filename + ". Error: " + ex.getMessage());
             return false;
         }
-    }
-
-    public String getUploadDir() {
-        return uploadDir;
     }
 }
