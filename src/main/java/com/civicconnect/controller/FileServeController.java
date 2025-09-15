@@ -15,11 +15,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FileServeController {
 
     // In-memory storage for uploaded files (temporary solution)
-    private static final Map<String, FileInfo> fileStorage = new ConcurrentHashMap<>();
+    private final Map<String, FileInfo> fileStorage = new ConcurrentHashMap<>();
 
-    public static void storeFile(String filename, String contentType, byte[] data) {
+    public void storeFile(String filename, String contentType, byte[] data) {
         fileStorage.put(filename, new FileInfo(contentType, data));
         System.out.println("✅ File stored in memory: " + filename + " (" + data.length + " bytes)");
+        System.out.println("✅ Total files in storage: " + fileStorage.size());
     }
 
     @GetMapping("/uploads/{filename:.+}")

@@ -1,6 +1,7 @@
 package com.civicconnect.service;
 
 import com.civicconnect.controller.FileServeController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,6 +10,9 @@ import java.util.UUID;
 
 @Service
 public class FileStorageService {
+
+    @Autowired
+    private FileServeController fileServeController;
 
     public String saveFile(MultipartFile file) throws IOException {
         if (file.isEmpty()) {
@@ -34,7 +38,7 @@ public class FileStorageService {
 
         try {
             // Store file in memory for immediate access
-            FileServeController.storeFile(uniqueFilename, file.getContentType(), file.getBytes());
+            fileServeController.storeFile(uniqueFilename, file.getContentType(), file.getBytes());
             
             System.out.println("✅ File saved to memory successfully:");
             System.out.println("- Original: " + originalFilename);
