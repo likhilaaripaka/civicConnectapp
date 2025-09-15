@@ -1,5 +1,6 @@
 package com.civicconnect.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
@@ -10,6 +11,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    @Value("${app.upload.dir:/tmp/uploads}")
+    private String uploadDir;
+
     @Bean
     public MultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
@@ -17,9 +21,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Serve uploaded files from uploads directory - public access
+        // Serve uploaded files from configurable uploads directory - public access
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:/app/uploads/")
+                .addResourceLocations("file:" + uploadDir + "/")
                 .setCachePeriod(0); // Disable caching for development
         
         // Serve static resources

@@ -24,11 +24,11 @@ WORKDIR /app
 # Create non-root user for security
 RUN addgroup -g 1001 -S appuser && adduser -u 1001 -S appuser -G appuser
 
-# Create uploads directory with proper permissions
-RUN mkdir -p /app/uploads && chown -R appuser:appuser /app/uploads
+# Create uploads directory with proper permissions in /tmp for cloud compatibility
+RUN mkdir -p /tmp/uploads && chown -R appuser:appuser /tmp/uploads
 
-# Create a volume for persistent file storage
-VOLUME ["/app/uploads"]
+# Set environment variable for upload directory
+ENV UPLOAD_DIR=/tmp/uploads
 
 # Copy built jar from build stage
 COPY --from=build /app/target/civicconnect-0.0.1-SNAPSHOT.jar app.jar

@@ -22,7 +22,8 @@ import java.util.UUID;
 @Service
 public class IssueService {
 
-    private static final String UPLOAD_DIR = "/app/uploads/";
+    @Autowired
+    private FileStorageService fileStorageService;
 
     @Autowired
     private IssueRepository issueRepository;
@@ -74,7 +75,7 @@ public class IssueService {
         if (imageFile != null && !imageFile.isEmpty()) {
             try {
                 System.out.println("Processing image file: " + imageFile.getOriginalFilename() + " (size: " + imageFile.getSize() + ")");
-                String imagePath = saveFile(imageFile);
+                String imagePath = fileStorageService.saveFile(imageFile);
                 if (imagePath != null && !imagePath.trim().isEmpty()) {
                     System.out.println("🔧 Setting image path on issue object: " + imagePath);
                     issue.setImagePath(imagePath);
@@ -94,7 +95,7 @@ public class IssueService {
         if (videoFile != null && !videoFile.isEmpty()) {
             try {
                 System.out.println("Processing video file: " + videoFile.getOriginalFilename() + " (size: " + videoFile.getSize() + ")");
-                String videoPath = saveFile(videoFile);
+                String videoPath = fileStorageService.saveFile(videoFile);
                 if (videoPath != null && !videoPath.trim().isEmpty()) {
                     issue.setVideoPath(videoPath);
                     System.out.println("✅ Video saved successfully with path: " + videoPath);
@@ -144,7 +145,7 @@ public class IssueService {
         // Handle solution image upload
         if (solutionImage != null && !solutionImage.isEmpty()) {
             try {
-                String solutionImagePath = saveFile(solutionImage);
+                String solutionImagePath = fileStorageService.saveFile(solutionImage);
                 if (solutionImagePath != null) {
                     issue.setSolutionImagePath(solutionImagePath);
                 }
@@ -181,55 +182,4 @@ public class IssueService {
         return issueRepository.findByIsDeletedTrueOrderByDeletedAtDesc();
     }
 
-    // ✅ Helper: Save uploaded file and return its path
-    private String saveFile(MultipartFile file) throws IOException {
-        if (file.isEmpty()) {
-            System.out.println("❌ File is empty, not saving");
-            return null;
-        }
-
-        // Create uploads directory if it doesn't exist
-        Path uploadDir = Paths.get("/app/uploads");
-        if (!Files.exists(uploadDir)) {
-            Files.createDirectories(uploadDir);
-            System.out.println("✅ Created uploads directory: " + uploadDir.toAbsolutePath());
-        }
-
-        // Generate unique filename
-        String originalFilename = file.getOriginalFilename();
-        if (originalFilename == null || originalFilename.trim().isEmpty()) {
-            System.out.println("❌ Original filename is null or empty");
-            return null;
-        }
-        
-        String extension = "";
-        if (originalFilename.contains(".")) {
-            extension = originalFilename.substring(originalFilename.lastIndexOf("."));
-        }
-        String uniqueFilename = System.currentTimeMillis() + "_" + UUID.randomUUID().toString() + extension;
-
-        // Save file
-        Path filePath = uploadDir.resolve(uniqueFilename);
-        try {
-            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("✅ File saved successfully:");
-            System.out.println("   - Original: " + originalFilename);
-            System.out.println("   - Saved as: " + uniqueFilename);
-            System.out.println("   - Full path: " + filePath.toAbsolutePath());
-            System.out.println("   - File size: " + Files.size(filePath) + " bytes");
-            
-            // Verify file exists
-            if (Files.exists(filePath)) {
-                System.out.println("✅ File verification successful");
-                return uniqueFilename;
-            } else {
-                System.out.println("❌ File verification failed - file does not exist after save");
-                return null;
-            }
-        } catch (IOException e) {
-            System.out.println("❌ Error saving file: " + e.getMessage());
-            e.printStackTrace();
-            throw e;
-        }
-    }
 }
