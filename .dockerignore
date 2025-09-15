@@ -1,0 +1,17 @@
+target/
+!target/*.jar
+!target/**/lib/
+*.log
+.git
+.gitignore
+README.md
+.env
+.DS_Store
+Thumbs.db
+*.iml
+.idea/
+.vscode/
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+uploads/*
+!uploads/.gitkeep

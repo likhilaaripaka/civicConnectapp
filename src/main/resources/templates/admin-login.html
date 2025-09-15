@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Login</title>
+    <meta charset="UTF-8">
+</head>
+<body th:replace="layout :: layout(~{::title}, ~{::content})">
+<div th:fragment="content">
+    <div class="container-fluid min-vh-100 d-flex flex-column">
+        <div class="row flex-grow-1 justify-content-center align-items-center py-5">
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <div class="text-center mb-5">
+                    <h1 class="display-5 fw-bold text-primary mb-3">
+                        <i class="fas fa-user-shield me-3"></i>
+                        Admin Portal
+                    </h1>
+                    <p class="lead text-muted">Secure administrative access</p>
+                </div>
+
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-5">
+                        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            <span th:text="${error}"></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+
+                        <!-- Toggle Buttons -->
+                        <div class="text-center mb-4">
+                            <div class="btn-group w-100" role="group">
+                                <button type="button" class="btn btn-warning" id="loginBtn">
+                                    <i class="fas fa-sign-in-alt me-1"></i>
+                                    Login
+                                </button>
+                                <button type="button" class="btn btn-outline-warning" id="registerBtn">
+                                    <i class="fas fa-user-plus me-1"></i>
+                                    Register
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Login Form -->
+                        <form id="loginForm" th:action="@{/admin/login}" method="post">
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label fw-semibold text-warning">
+                                    <i class="fas fa-envelope me-2"></i>
+                                    Admin Email
+                                </label>
+                                <input type="email" class="form-control form-control-lg" id="loginEmail" name="email" 
+                                       placeholder="Enter your admin email" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="loginPassword" class="form-label fw-semibold text-warning">
+                                    <i class="fas fa-lock me-2"></i>
+                                    Password
+                                </label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control form-control-lg" id="loginPassword" name="password" 
+                                           placeholder="Enter your password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleLoginPassword">
+                                        <i class="fas fa-eye" id="loginPasswordIcon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-warning btn-lg w-100 mb-3">
+                                <i class="fas fa-sign-in-alt me-2"></i>
+                                Access Admin Dashboard
+                            </button>
+                        </form>
+
+                        <!-- Register Form -->
+                        <form id="registerForm" th:action="@{/admin/register}" method="post" style="display: none;">
+                            <div class="mb-3">
+                                <label for="registerName" class="form-label fw-semibold text-warning">
+                                    <i class="fas fa-user me-2"></i>
+                                    Full Name
+                                </label>
+                                <input type="text" class="form-control form-control-lg" id="registerName" name="name" 
+                                       placeholder="Enter your full name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label fw-semibold text-warning">
+                                    <i class="fas fa-envelope me-2"></i>
+                                    Admin Email
+                                </label>
+                                <input type="email" class="form-control form-control-lg" id="registerEmail" name="email" 
+                                       placeholder="Enter your admin email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label fw-semibold text-warning">
+                                    <i class="fas fa-lock me-2"></i>
+                                    Password
+                                </label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control form-control-lg" id="registerPassword" name="password" 
+                                           placeholder="Create a secure password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleRegisterPassword">
+                                        <i class="fas fa-eye" id="registerPasswordIcon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerLocation" class="form-label fw-semibold text-warning">
+                                    <i class="fas fa-map-marker-alt me-2"></i>
+                                    Location
+                                </label>
+                                <input type="text" class="form-control form-control-lg" id="registerLocation" name="location" 
+                                       placeholder="Enter your city/area" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="registerCategory" class="form-label fw-semibold text-warning">
+                                    <i class="fas fa-tags me-2"></i>
+                                    Specialization Category
+                                </label>
+                                <select class="form-control form-control-lg" id="registerCategory" name="category" required>
+                                    <option value="">Select your area of expertise</option>
+                                    <option value="ROADS">Roads & Transportation</option>
+                                    <option value="ELECTRICITY">Electricity & Power</option>
+                                    <option value="WATER_SUPPLY">Water Supply & Management</option>
+                                    <option value="WASTE_MANAGEMENT">Waste Management & Sanitation</option>
+                                    <option value="PUBLIC_SAFETY">Public Safety & Security</option>
+                                    <option value="OTHERS">Others (General)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-lg w-100 mb-3">
+                                <i class="fas fa-user-plus me-2"></i>
+                                Create Admin Account
+                            </button>
+                        </form>
+
+                        <!-- Portal Links -->
+                        <div class="text-center mt-4">
+                            <div class="hero-section p-3">
+                                <p class="text-muted mb-3">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Looking for a different portal?
+                                </p>
+                                <a href="/user/login" class="btn btn-primary btn-lg px-4">
+                                    <i class="fas fa-users me-2"></i>
+                                    Citizen Portal
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Admin Features Section -->
+                        <div class="mt-4 p-3 bg-light rounded-4">
+                            <h6 class="text-warning fw-bold mb-3">
+                                <i class="fas fa-crown me-2"></i>
+                                Admin Capabilities
+                            </h6>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon-success me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                        <small class="text-success fw-semibold">Resolve Issues</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon-primary me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <small class="text-primary fw-semibold">Track Progress</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon-warning me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">
+                                            <i class="fas fa-users-cog"></i>
+                                        </div>
+                                        <small class="text-warning fw-semibold">Manage Community</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon-success me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">
+                                            <i class="fas fa-shield-alt"></i>
+                                        </div>
+                                        <small class="text-success fw-semibold">Secure Platform</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form toggle functionality
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+
+        loginBtn.addEventListener('click', function() {
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            loginBtn.classList.remove('btn-outline-warning');
+            loginBtn.classList.add('btn-warning');
+            registerBtn.classList.remove('btn-warning');
+            registerBtn.classList.add('btn-outline-warning');
+        });
+
+        registerBtn.addEventListener('click', function() {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            registerBtn.classList.remove('btn-outline-warning');
+            registerBtn.classList.add('btn-warning');
+            loginBtn.classList.remove('btn-warning');
+            loginBtn.classList.add('btn-outline-warning');
+        });
+
+        // Check for server flags to show appropriate form
+        const showSignIn = /*[[${showSignIn}]]*/ false;
+        const showSignUp = /*[[${showSignUp}]]*/ false;
+        
+        if (showSignUp) {
+            registerBtn.click();
+        } else if (showSignIn) {
+            loginBtn.click();
+        }
+
+        // Password toggle functionality
+        const toggleLoginPassword = document.getElementById('toggleLoginPassword');
+        const loginPasswordInput = document.getElementById('loginPassword');
+        const loginPasswordIcon = document.getElementById('loginPasswordIcon');
+
+        toggleLoginPassword.addEventListener('click', function() {
+            const type = loginPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            loginPasswordInput.setAttribute('type', type);
+            loginPasswordIcon.classList.toggle('fa-eye');
+            loginPasswordIcon.classList.toggle('fa-eye-slash');
+        });
+
+        const toggleRegisterPassword = document.getElementById('toggleRegisterPassword');
+        const registerPasswordInput = document.getElementById('registerPassword');
+        const registerPasswordIcon = document.getElementById('registerPasswordIcon');
+
+        toggleRegisterPassword.addEventListener('click', function() {
+            const type = registerPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            registerPasswordInput.setAttribute('type', type);
+            registerPasswordIcon.classList.toggle('fa-eye');
+            registerPasswordIcon.classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Logout - CivicConnect</title>
+    <meta charset="UTF-8">
+</head>
+<body th:replace="layout :: layout(~{::title}, ~{::content})">
+<div th:fragment="content">
+    <div class="row justify-content-center min-vh-75 align-items-center py-5">
+        <div class="col-lg-6">
+            <!-- Hero Section -->
+            <div class="card border-0 shadow-lg mb-4" style="background: var(--gradient-warning);">
+                <div class="card-body text-center py-5">
+                    <div class="feature-icon icon-primary mx-auto mb-4" style="width: 100px; height: 100px; font-size: 3rem; background: rgba(255, 255, 255, 0.2);">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h1 class="display-5 fw-bold text-white mb-4">🛡️ Admin Logged Out</h1>
+                    <p class="lead text-white opacity-90 mb-4">Thank you for your service! Your admin session has ended securely.</p>
+                    <p class="text-white fs-6">✨ Ready to continue building stronger communities?</p>
+                </div>
+            </div>
+
+            <!-- Login Options -->
+            <div class="card border-0 shadow-lg">
+                <div class="card-body text-center p-5">
+                    <h3 class="text-primary fw-bold mb-4">
+                        <i class="fas fa-building text-warning me-2"></i>
+                        🏛️ Continue Leading Solutions
+                    </h3>
+                    <p class="text-muted mb-4">Manage civic issues, respond to citizens, and drive community improvements</p>
+                    
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="d-flex flex-column gap-2 text-start">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-3"></i>
+                                    <span>Review and prioritize citizen issues</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-3"></i>
+                                    <span>Mark issues as solved with solution details</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-3"></i>
+                                    <span>Delete resolved issues with documentation</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-3"></i>
+                                    <span>View solved and deleted issues history</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-3"></i>
+                                    <span>Communicate directly with citizens</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-3 justify-content-center flex-wrap mb-4">
+                        <a href="/admin/login" class="btn btn-warning btn-lg px-5 py-3 fw-semibold">
+                            <i class="fas fa-user-shield me-2"></i>
+                            Admin Login
+                        </a>
+                        <a href="/user/login" class="btn btn-primary btn-lg px-5 py-3 fw-semibold">
+                            <i class="fas fa-users me-2"></i>
+                            Citizen Login
+                        </a>
+                    </div>
+                    
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <a href="/" class="btn btn-outline-primary">
+                            <i class="fas fa-home me-2"></i>
+                            Back to Home
+                        </a>
+                        <a href="/features" class="btn btn-outline-secondary">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Report New Issue - CivicConnect</title>
+    <meta charset="UTF-8">
+</head>
+<body th:replace="layout :: layout(~{::title}, ~{::content})">
+<div th:fragment="content" class="mt-5">
+    <!-- Header Section -->
+    <div class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="text-center py-4 rounded-4" style="background: var(--gradient-primary);">
+                    <h2 class="display-6 fw-bold text-white mb-3">
+                        <i class="fas fa-plus-circle text-warning me-3"></i>
+                        Report New Issue
+                    </h2>
+                    <p class="lead text-white opacity-90 mb-0">
+                        🌟 Help make your community better by reporting civic issues
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Section -->
+    <div class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-light border-0 py-4">
+                        <h4 class="card-title text-primary fw-bold mb-0 text-center">
+                            <i class="fas fa-edit text-success me-2"></i>
+                            Issue Details
+                        </h4>
+                    </div>
+                    <div class="card-body p-5">
+                        <form th:action="@{/new-issue}" method="post" enctype="multipart/form-data" onsubmit="console.log('Form submitting with files:', document.getElementById('imageFile').files, document.getElementById('videoFile').files)">
+                            <div class="row">
+                                <div class="col-md-12 mb-4">
+                                    <label for="title" class="form-label fw-semibold text-primary">
+                                        <i class="fas fa-heading me-2"></i>
+                                        Issue Title *
+                                    </label>
+                                    <input type="text" id="title" name="title" class="form-control form-control-lg" 
+                                           placeholder="Brief, descriptive title for your issue" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label for="category" class="form-label fw-semibold text-primary">
+                                        <i class="fas fa-tags me-2"></i>
+                                        Category *
+                                    </label>
+                                    <select id="category" name="category" class="form-select form-select-lg" required>
+                                        <option value="">🏷️ Select Issue Category</option>
+                                        <option th:each="cat : ${categories}" th:value="${cat}" th:text="${cat}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label for="location" class="form-label fw-semibold text-primary">
+                                        <i class="fas fa-map-marker-alt me-2"></i>
+                                        Location *
+                                    </label>
+                                    <input type="text" id="location" name="location" class="form-control form-control-lg" 
+                                           placeholder="Street address or landmark" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="description" class="form-label fw-semibold text-primary">
+                                    <i class="fas fa-align-left me-2"></i>
+                                    Detailed Description *
+                                </label>
+                                <textarea id="description" name="description" class="form-control" rows="5" 
+                                          placeholder="Provide a detailed description of the issue, including when it started, how it affects the community, and any other relevant information..." required></textarea>
+                            </div>
+
+                            <!-- Media Upload Section -->
+                            <div class="row">
+                                <div class="col-12 mb-4">
+                                    <h5 class="text-success fw-bold mb-3 text-center">
+                                        <i class="fas fa-camera me-2"></i>
+                                        📸 Add Visual Evidence (Optional)
+                                    </h5>
+                                    <p class="text-muted mb-3 text-center">Photos and videos help authorities understand the issue better</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label for="imageFile" class="form-label fw-semibold text-success">
+                                        <i class="fas fa-image me-2"></i>
+                                        Upload Photo
+                                    </label>
+                                    <input type="file" id="imageFile" name="imageFile" class="form-control form-control-lg" 
+                                           accept="image/*" onchange="previewImage(this)">
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle text-info me-1"></i>
+                                        Supported formats: JPG, PNG, GIF (Max 10MB)
+                                    </div>
+                                    <div id="imagePreview" class="mt-2" style="display: none;">
+                                        <img id="previewImg" src="#" alt="Image Preview" class="img-fluid rounded" style="max-height: 200px;">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label for="videoFile" class="form-label fw-semibold text-success">
+                                        <i class="fas fa-video me-2"></i>
+                                        Upload Video
+                                    </label>
+                                    <input type="file" id="videoFile" name="videoFile" class="form-control form-control-lg" 
+                                           accept="video/*" onchange="previewVideo(this)">
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle text-info me-1"></i>
+                                        Supported formats: MP4, AVI, MOV (Max 50MB)
+                                    </div>
+                                    <div id="videoPreview" class="mt-2" style="display: none;">
+                                        <video id="previewVideo" controls class="img-fluid rounded" style="max-height: 200px;">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Section -->
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                                        <div class="text-muted">
+                                            <i class="fas fa-shield-alt text-success me-2"></i>
+                                            Your report will be reviewed by city officials
+                                        </div>
+                                        <div class="d-flex gap-3 flex-wrap">
+                                            <a href="/citizen-dashboard" class="btn btn-outline-secondary btn-lg px-4">
+                                                <i class="fas fa-arrow-left me-2"></i>
+                                                Back to Dashboard
+                                            </a>
+                                            <button type="submit" class="btn btn-primary btn-lg px-5 fw-semibold">
+                                                <i class="fas fa-paper-plane me-2"></i>
+                                                Submit Issue
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('imagePreview');
+            const previewImg = document.getElementById('previewImg');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+
+        function previewVideo(input) {
+            const preview = document.getElementById('videoPreview');
+            const previewVideo = document.getElementById('previewVideo');
+            
+            if (input.files && input.files[0]) {
+                const url = URL.createObjectURL(input.files[0]);
+                previewVideo.src = url;
+                preview.style.display = 'block';
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+    </script>
+
+    <!-- Help Section -->
+    <div class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card bg-light border-0">
+                    <div class="card-body py-4">
+                        <h5 class="text-primary fw-bold mb-3 text-center">
+                            <i class="fas fa-lightbulb text-warning me-2"></i>
+                            💡 Tips for Effective Reporting
+                        </h5>
+                        <div class="row justify-content-center">
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                                    <div>
+                                        <strong>Be Specific</strong>
+                                        <p class="text-muted mb-0 small">Provide exact location and clear description</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex align-items-start">
+                                    <i class="fas fa-camera text-info me-3 mt-1"></i>
+                                    <div>
+                                        <strong>Include Photos</strong>
+                                        <p class="text-muted mb-0 small">Visual evidence speeds up resolution</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex align-items-start">
+                                    <i class="fas fa-clock text-warning me-3 mt-1"></i>
+                                    <div>
+                                        <strong>Report Promptly</strong>
+                                        <p class="text-muted mb-0 small">Early reporting prevents bigger problems</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

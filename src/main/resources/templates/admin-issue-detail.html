@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title th:text="${issue.title} + ' - Admin - CivicConnect'">Issue Details - Admin - CivicConnect</title>
+</head>
+<body>
+    <main class="container-fluid px-4">
+        <!-- Header Section -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="text-center py-2 rounded-3" style="background: var(--gradient-warning);">
+                    <h4 class="fw-bold text-dark mb-2">
+                        <i class="fas fa-user-shield text-dark me-2"></i>
+                        Admin Issue Review
+                    </h4>
+                    <p class="small text-dark opacity-75 mb-0">
+                        🔍 Detailed issue analysis and administrative actions
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Title/Name/Location and Action Buttons Side by Side -->
+        <div class="row mb-3">
+            <div class="col-lg-8">
+                <!-- Issue Header - Narrower -->
+                <div class="card border-0 shadow" style="background: var(--gradient-primary);">
+                    <div class="card-body p-3 text-white">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="fw-bold mb-0" th:text="${issue.title}"></h5>
+                            <span class="badge bg-warning text-dark px-2 py-1" 
+                                  th:text="${issue.category.name().replace('_', ' ')}"></span>
+                        </div>
+                        <div class="row text-white-75 small">
+                            <div class="col-md-4 mb-1">
+                                <i class="fas fa-map-marker-alt text-warning me-1"></i>
+                                <span th:text="${issue.location}"></span>
+                            </div>
+                            <div class="col-md-4 mb-1">
+                                <i class="fas fa-clock text-info me-1"></i>
+                                <span th:text="${#temporals.format(issue.createdAt, 'MMM dd, yyyy HH:mm')}"></span>
+                            </div>
+                            <div class="col-md-4 mb-1">
+                                <i class="fas fa-user text-success me-1"></i>
+                                <span th:text="${issue.user.name}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <!-- Action Panel -->
+                <div class="card border-0 shadow h-100">
+                    <div class="card-header border-0 py-2" style="background: var(--gradient-success);">
+                        <h6 class="mb-0 text-white fw-bold">
+                            <i class="fas fa-tools me-1"></i>
+                            Admin Actions
+                        </h6>
+                    </div>
+                    <div class="card-body p-3 d-flex flex-column justify-content-center">
+                        <form th:action="@{'/admin/issue/' + ${issue.id} + '/solve'}" method="post">
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-success btn-sm" 
+                                        onclick="return confirm('Mark this issue as solved? This action cannot be undone.')">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Mark as Solved
+                                </button>
+                            </div>
+                        </form>
+                        <div class="d-grid">
+                            <a href="/admin-dashboard" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-arrow-left me-2"></i>
+                                Back to Dashboard
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Issue Information - Full Width -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="card border-0 shadow">
+                    <div class="card-header bg-light border-0 py-2">
+                        <h6 class="mb-0 text-primary fw-bold small">
+                            <i class="fas fa-info-circle text-info me-1"></i>
+                            Issue Information
+                        </h6>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="row mb-2">
+                            <div class="col-2 text-muted fw-semibold small">Category:</div>
+                            <div class="col-4">
+                                <span class="badge bg-warning text-dark small" th:text="${issue.category.name().replace('_', ' ')}"></span>
+                            </div>
+                            <div class="col-2 text-muted fw-semibold small">Location:</div>
+                            <div class="col-4 small" th:text="${issue.location}"></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2 text-muted fw-semibold small">Reported by:</div>
+                            <div class="col-4">
+                                <span class="text-primary fw-semibold small" th:text="${issue.user.name}"></span>
+                            </div>
+                            <div class="col-2 text-muted fw-semibold small">Created:</div>
+                            <div class="col-4 small" th:text="${#temporals.format(issue.createdAt, 'MMM dd, yyyy')}"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2 text-muted fw-semibold small">Comments:</div>
+                            <div class="col-4">
+                                <span class="badge bg-info small" th:text="${#lists.size(comments)}"></span>
+                            </div>
+                            <div class="col-2 text-muted fw-semibold small">Support:</div>
+                            <div class="col-4">
+                                <span class="badge bg-success small" th:text="${supportCount}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Issue Description - Full Width -->
+        <div class="row mb-3">
+            <div class="col-12">
+
+                <!-- Issue Description -->
+                <div class="card border-0 shadow mb-3">
+                    <div class="card-header bg-light border-0 py-2">
+                        <h6 class="card-title text-primary fw-bold mb-0">
+                            <i class="fas fa-align-left text-success me-1"></i>
+                            Issue Description
+                        </h6>
+                    </div>
+                    <div class="card-body p-3">
+                        <p class="card-text small lh-base" th:text="${issue.description}"></p>
+                        
+                        <!-- Media Files -->
+                        <div th:if="${issue.imagePath != null or issue.videoPath != null}" class="mt-3">
+                            <h6 class="text-success fw-bold mb-2 small">
+                                <i class="fas fa-camera me-1"></i>
+                                📸 Visual Evidence
+                            </h6>
+                        </div>
+                        
+                        <div th:if="${issue.imagePath != null and !issue.imagePath.isEmpty()}" class="mt-3">
+                            <div class="position-relative">
+                                <div class="alert alert-warning py-2">
+                                    <small><strong>🔧 Debug:</strong><br>
+                                    <strong>Path:</strong> <code th:text="${issue.imagePath}"></code><br>
+                                    <strong>URL:</strong> <code th:text="@{'/uploads/' + ${issue.imagePath}}"></code><br>
+                                    <a th:href="@{'/uploads/' + ${issue.imagePath}}" target="_blank" class="btn btn-xs btn-primary mt-1">
+                                        🔗 Test Access
+                                    </a></small>
+                                </div>
+                                
+                                <!-- Main Image Display -->
+                                <div class="image-container border rounded p-1">
+                                    <img th:src="@{'/uploads/' + ${issue.imagePath}}" 
+                                         class="img-fluid rounded shadow" 
+                                         style="max-height: 250px; width: auto;"
+                                         onload="console.log('✅ Image loaded successfully:', this.src); this.nextElementSibling.innerHTML='<div class=alert alert-success>✅ Image loaded successfully!</div>';"
+                                         onerror="console.error('❌ Image failed to load:', this.src); this.style.display='none'; this.nextElementSibling.innerHTML='<div class=alert alert-danger><strong>❌ Image Load Failed</strong><br>URL: ' + this.src + '<br>Check console for details.</div>';"
+                                         th:alt="'Issue image: ' + ${issue.imagePath}">
+                                    <div class="load-status-placeholder"></div>
+                                </div>
+                                <div class="mt-1">
+                                    <small class="text-muted">
+                                        📁 <span th:text="${issue.imagePath}"></span>
+                                    </small>
+                                    <br>
+                                    <a th:href="@{'/uploads/' + ${issue.imagePath}}" target="_blank" class="btn btn-outline-info btn-xs mt-1">
+                                        <i class="fas fa-external-link-alt me-1"></i>
+                                        Open
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div th:if="${issue.videoPath != null and !issue.videoPath.isEmpty()}" class="mt-3">
+                            <div class="position-relative">
+                                <video controls class="img-fluid rounded shadow" style="max-height: 250px;">
+                                    <source th:src="@{'/uploads/' + ${issue.videoPath}}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <div class="mt-2">
+                                    <small class="text-muted">
+                                        🎥 File: <span th:text="${issue.videoPath}"></span>
+                                    </small>
+                                    <br>
+                                    <a th:href="@{'/uploads/' + ${issue.videoPath}}" target="_blank" class="btn btn-outline-info btn-xs">
+                                        <i class="fas fa-external-link-alt me-1"></i>
+                                        Open Video
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comments Section - Full Width -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card border-0 shadow">
+                    <div class="card-header bg-light border-0 py-2">
+                        <h6 class="mb-0 text-primary fw-bold">
+                            <i class="fas fa-comments text-info me-1"></i>
+                            Comments
+                            <span class="badge bg-primary ms-1" th:text="${#lists.size(comments)}"></span>
+                        </h6>
+                    </div>
+                    <div class="card-body p-3">
+                        <!-- Comments List -->
+                        <div th:if="${#lists.isEmpty(comments)}" class="text-center text-muted py-3">
+                            <div class="feature-icon icon-secondary mx-auto mb-2">
+                                <i class="fas fa-comment-slash"></i>
+                            </div>
+                            <p class="small mb-1">No comments yet</p>
+                            <p class="text-muted small">Be the first to comment</p>
+                        </div>
+
+                        <div th:unless="${#lists.isEmpty(comments)}">
+                            <div th:each="comment : ${comments}" class="border-bottom border-light pb-2 mb-3">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <div class="d-flex align-items-center">
+                                        <div class="feature-icon icon-primary me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div>
+                                            <strong class="text-primary small" th:text="${comment.user.name}"></strong>
+                                            <div class="text-muted" style="font-size: 0.75rem;" 
+                                                 th:text="${#temporals.format(comment.createdAt, 'MMM dd, HH:mm')}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-1 mb-0 ms-4 ps-2 small" th:text="${comment.content}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

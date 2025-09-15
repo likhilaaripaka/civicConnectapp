@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Logout - CivicConnect</title>
+    <meta charset="UTF-8">
+</head>
+<body th:replace="layout :: layout(~{::title}, ~{::content})">
+<div th:fragment="content">
+    <style>
+        .logout-section {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 15px;
+        }
+        
+        .logout-container {
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        .hero-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .login-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .login-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .user-card {
+            border-color: #667eea;
+        }
+        
+        .user-card:hover {
+            border-color: #5a6fd8;
+        }
+        
+        .admin-card {
+            border-color: #ff6b6b;
+        }
+        
+        .admin-card:hover {
+            border-color: #ff5252;
+        }
+        
+        .login-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .user-icon {
+            color: #667eea;
+        }
+        
+        .admin-icon {
+            color: #ff6b6b;
+        }
+        
+        .login-btn {
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        
+        .user-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .user-btn:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6a4190);
+            transform: scale(1.05);
+            color: white;
+        }
+        
+        .admin-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+        }
+        
+        .admin-btn:hover {
+            background: linear-gradient(135deg, #ff5252, #e55100);
+            transform: scale(1.05);
+            color: white;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            color: #666;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .login-options {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .hero-card {
+                padding: 40px 20px;
+            }
+            
+            .login-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+
+    <div class="logout-section">
+        <div class="logout-container">
+            <!-- Hero Section -->
+            <div class="hero-card">
+                <h1 class="display-4 mb-4">You've Been Logged Out</h1>
+                <p class="lead mb-4">Thank you for using CivicConnect! Your session has ended securely.</p>
+                <p class="fs-5">Ready to make a difference in your community? Choose your login option below.</p>
+            </div>
+
+            <!-- Login Options -->
+            <div class="login-options">
+                <!-- User Login Card -->
+                <div class="login-card user-card">
+                    <i class="fas fa-users login-icon user-icon"></i>
+                    <h3 class="mb-3">Citizens Portal</h3>
+                    <p class="text-muted mb-3">Report civic issues, track progress, and engage with your community</p>
+                    
+                    <ul class="feature-list">
+                        <li>Report issues with photos/videos</li>
+                        <li>Track resolution progress</li>
+                        <li>Support community issues</li>
+                        <li>Comment and collaborate</li>
+                    </ul>
+                    
+                    <div class="mt-4">
+                        <h5 class="text-primary mb-3">🚀 Make Your Voice Heard!</h5>
+                        <p class="small text-muted mb-3">Join thousands of citizens creating positive change</p>
+                        <a href="/user/login" class="btn login-btn user-btn">
+                            <i class="fas fa-sign-in-alt me-2"></i>Citizen Login
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Admin Login Card -->
+                <div class="login-card admin-card">
+                    <i class="fas fa-shield-alt login-icon admin-icon"></i>
+                    <h3 class="mb-3">Admin Portal</h3>
+                    <p class="text-muted mb-3">Manage civic issues, respond to citizens, and drive community solutions</p>
+                    
+                    <ul class="feature-list">
+                        <li>Review and prioritize issues</li>
+                        <li>Communicate with citizens</li>
+                        <li>Mark issues as resolved</li>
+                        <li>Manage community feedback</li>
+                    </ul>
+                    
+                    <div class="mt-4">
+                        <h5 class="text-danger mb-3">🏛️ Lead the Solution!</h5>
+                        <p class="small text-muted mb-3">Help build stronger, better communities</p>
+                        <a href="/admin/login" class="btn login-btn admin-btn">
+                            <i class="fas fa-cog me-2"></i>Admin Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="card bg-light">
+                        <div class="card-body text-center py-4">
+                            <h4 class="mb-3">🌟 Why CivicConnect?</h4>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <i class="fas fa-clock fa-2x text-primary mb-2"></i>
+                                    <h6>Real-time Updates</h6>
+                                    <small class="text-muted">Track progress instantly</small>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <i class="fas fa-users fa-2x text-success mb-2"></i>
+                                    <h6>Community Driven</h6>
+                                    <small class="text-muted">Powered by citizen engagement</small>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <i class="fas fa-shield-alt fa-2x text-warning mb-2"></i>
+                                    <h6>Secure & Reliable</h6>
+                                    <small class="text-muted">Your data is protected</small>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <i class="fas fa-chart-line fa-2x text-info mb-2"></i>
+                                    <h6>Proven Results</h6>
+                                    <small class="text-muted">75% issue resolution rate</small>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <a href="/" class="btn btn-outline-primary me-3">
+                                    <i class="fas fa-home me-2"></i>Back to Home
+                                </a>
+                                <a href="/features" class="btn btn-outline-secondary">
+                                    <i class="fas fa-info-circle me-2"></i>Learn More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

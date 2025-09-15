@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Features</title>
+    <meta charset="UTF-8">
+</head>
+<body th:replace="layout :: layout(~{::title}, ~{::content})">
+<div th:fragment="content">
+    <div class="mt-5">
+        <!-- Hero Section with Gradient Background -->
+        <div class="hero-section text-center mb-5 py-5 rounded-4" style="background: var(--gradient-primary);">
+            <div class="container">
+                <h1 class="display-4 fw-bold text-white mb-4">
+                    <i class="fas fa-star text-warning me-3"></i>
+                    CivicConnect Features
+                </h1>
+                <p class="lead text-white opacity-90 mb-4">✨ Empowering citizens to create positive change in their communities</p>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="d-flex justify-content-center gap-4 flex-wrap">
+                            <div class="feature-highlight text-white">
+                                <i class="fas fa-users fa-2x text-warning mb-2"></i>
+                                <div class="fw-semibold">5000+ Citizens</div>
+                            </div>
+                            <div class="feature-highlight text-white">
+                                <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
+                                <div class="fw-semibold">750+ Issues Solved</div>
+                            </div>
+                            <div class="feature-highlight text-white">
+                                <i class="fas fa-heart fa-2x text-danger mb-2"></i>
+                                <div class="fw-semibold">Community Driven</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 feature-card border-0 shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="text-center mb-3">
+                            <div class="feature-icon icon-primary mx-auto mb-3">
+                                <i class="fas fa-camera fa-2x"></i>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-primary fw-bold">📸 Report Issues with Media</h5>
+                        <p class="card-text text-muted">Upload photos and videos to document civic issues. Visual evidence helps authorities understand and prioritize problems effectively.</p>
+                        <ul class="list-unstyled feature-list">
+                            <li><i class="fas fa-check-circle text-success me-2"></i>High-quality image uploads</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Video documentation support</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Multiple file attachments</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 feature-card border-0 shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="text-center mb-3">
+                            <div class="feature-icon icon-success mx-auto mb-3">
+                                <i class="fas fa-chart-line fa-2x"></i>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-success fw-bold">📊 Real-Time Progress Tracking</h5>
+                        <p class="card-text text-muted">Monitor the status of your reported issues from submission to resolution. Stay informed with automatic updates.</p>
+                        <ul class="list-unstyled feature-list">
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Issue status updates</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Timeline tracking</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Resolution notifications</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 feature-card border-0 shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="text-center mb-3">
+                            <div class="feature-icon icon-info mx-auto mb-3">
+                                <i class="fas fa-users fa-2x"></i>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-info fw-bold">🤝 Community Support System</h5>
+                        <p class="card-text text-muted">Support issues reported by fellow citizens. The more support an issue receives, the higher its priority becomes.</p>
+                        <ul class="list-unstyled feature-list">
+                            <li><i class="fas fa-check-circle text-success me-2"></i>One-click issue support</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Community engagement metrics</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Popular issues highlighting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 feature-card border-0 shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="text-center mb-3">
+                            <div class="feature-icon icon-warning mx-auto mb-3">
+                                <i class="fas fa-building fa-2x"></i>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-warning fw-bold">🏛️ Direct Authority Connection</h5>
+                        <p class="card-text text-muted">Connect directly with city officials and administrators. Your voice reaches the right people at the right time.</p>
+                        <ul class="list-unstyled feature-list">
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Admin dashboard for officials</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Direct communication channel</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Transparent resolution process</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 feature-card border-0 shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="text-center mb-3">
+                            <div class="feature-icon icon-danger mx-auto mb-3">
+                                <i class="fas fa-tags fa-2x"></i>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-danger fw-bold">🏷️ Smart Categorization</h5>
+                        <p class="card-text text-muted">Organize issues by categories for better management and faster resolution by relevant departments.</p>
+                        <ul class="list-unstyled feature-list">
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Infrastructure issues</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Environmental concerns</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Public safety matters</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Transportation problems</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 feature-card border-0 shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="text-center mb-3">
+                            <div class="feature-icon icon-secondary mx-auto mb-3">
+                                <i class="fas fa-comments fa-2x"></i>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-secondary fw-bold">💬 Interactive Comments</h5>
+                        <p class="card-text text-muted">Engage in discussions about civic issues. Share additional information and collaborate with your community.</p>
+                        <ul class="list-unstyled feature-list">
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Public comment threads</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Additional information sharing</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i>Community collaboration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card border-0 shadow-lg" style="background: var(--gradient-success);">
+                    <div class="card-body text-center py-5">
+                        <h3 class="fw-bold mb-4" style="color: #FFD700;">
+                            <i class="fas fa-star text-warning me-2"></i>
+                            Why Choose CivicConnect?
+                        </h3>
+                        <div class="row mt-4">
+                            <div class="col-md-3 mb-4">
+                                <div class="feature-benefit text-black">
+                                    <div class="feature-icon icon-warning mx-auto mb-3" style="background: rgba(255, 255, 255, 0.2);">
+                                        <i class="fas fa-rocket fa-2x"></i>
+                                    </div>
+                                    <h4 class="fw-bold">🚀 Fast</h4>
+                                    <p>Quick issue reporting and rapid response times</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-4">
+                                <div class="feature-benefit text-black">
+                                    <div class="feature-icon icon-info mx-auto mb-3" style="background: rgba(255, 255, 255, 0.2);">
+                                        <i class="fas fa-shield-alt fa-2x"></i>
+                                    </div>
+                                    <h4 class="fw-bold">🔒 Secure</h4>
+                                    <p>Your data is protected with enterprise-grade security</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-4">
+                                <div class="feature-benefit text-black">
+                                    <div class="feature-icon icon-success mx-auto mb-3" style="background: rgba(255, 255, 255, 0.2);">
+                                        <i class="fas fa-mobile-alt fa-2x"></i>
+                                    </div>
+                                    <h4 class="fw-bold">📱 Mobile-Friendly</h4>
+                                    <p>Access from any device, anywhere, anytime</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-4">
+                                <div class="feature-benefit text-black">
+                                    <div class="feature-icon icon-primary mx-auto mb-3" style="background: rgba(255, 255, 255, 0.2);">
+                                        <i class="fas fa-bullseye fa-2x"></i>
+                                    </div>
+                                    <h4 class="fw-bold">🎯 Effective</h4>
+                                    <p>Proven track record of successful issue resolutions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <h3 class="display-6 fw-bold text-dark mb-4">Ready to Make a Difference?</h3>
+                    <p class="lead text-dark mb-5">Join thousands of citizens already using CivicConnect to improve their communities</p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="/user/login" class="btn btn-primary btn-lg px-5 py-3 fw-semibold">
+                            <i class="fas fa-users me-2"></i>
+                            Get Started as Citizen
+                        </a>
+                        <a href="/admin/login" class="btn btn-outline-primary btn-lg px-5 py-3 fw-semibold">
+                            <i class="fas fa-user-shield me-2"></i>
+                            Admin Access
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

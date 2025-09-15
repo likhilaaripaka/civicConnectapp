@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  civicconnect:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/civicconnect
+      - SPRING_DATASOURCE_USERNAME=civicconnect
+      - SPRING_DATASOURCE_PASSWORD=civicconnect123
+    depends_on:
+      - db
+    volumes:
+      - ./uploads:/app/uploads
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=civicconnect
+      - POSTGRES_USER=civicconnect
+      - POSTGRES_PASSWORD=civicconnect123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:

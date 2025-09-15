@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Home - CivicConnect</title>
+</head>
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="py-4" style="background: var(--gradient-primary); border-radius: 15px; margin: 10px;">
+            <div class="container">
+                <div class="row align-items-center" style="min-height: 60vh;">
+                    <div class="col-lg-6">
+                        <div class="hero-section text-white p-5 rounded-4">
+                            <h1 class="display-4 fw-bold mb-4">
+                                <i class="fas fa-city me-3 text-warning"></i>
+                                Welcome to CivicConnect
+                            </h1>
+                            <p class="lead mb-4 opacity-90">
+                                🌟 Empowering citizens to report issues, track progress, and build stronger communities together. 
+                                Your voice matters in shaping a better tomorrow.
+                            </p>
+                            <div class="d-flex gap-3 flex-wrap">
+                                <a href="/user/login" class="btn btn-warning btn-lg px-5 py-3 fw-semibold">
+                                    <i class="fas fa-users me-2"></i>
+                                    Join as Citizen
+                                </a>
+                                <a href="/admin/login" class="btn btn-outline-light btn-lg px-5 py-3 fw-semibold">
+                                    <i class="fas fa-user-shield me-2"></i>
+                                    Admin Access
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <div class="position-relative">
+                            <div class="feature-icon icon-warning mx-auto mb-4" style="width: 200px; height: 200px; font-size: 5rem; background: rgba(255, 255, 255, 0.1);">
+                                <i class="fas fa-city text-warning"></i>
+                            </div>
+                            <div class="d-flex justify-content-center gap-3 mt-4">
+                                <div class="feature-icon icon-success" style="width: 80px; height: 80px; font-size: 2rem; background: rgba(255, 255, 255, 0.1);">
+                                    <i class="fas fa-heart text-success"></i>
+                                </div>
+                                <div class="feature-icon icon-primary" style="width: 80px; height: 80px; font-size: 2rem; background: rgba(255, 255, 255, 0.1);">
+                                    <i class="fas fa-hands-helping text-info"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Statistics -->
+        <div class="container mb-5">
+            <div class="row justify-content-center">
+                <div class="col-md-3 col-sm-6 mb-4 d-flex">
+                    <div class="card text-center h-100 shadow-sm w-100">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                            <h4 class="card-title">1000+</h4>
+                            <p class="card-text">Issues Reported</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 d-flex">
+                    <div class="card text-center h-100 shadow-sm w-100">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                            <h4 class="card-title">750+</h4>
+                            <p class="card-text">Issues Resolved</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 d-flex">
+                    <div class="card text-center h-100 shadow-sm w-100">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <i class="fas fa-users fa-3x text-info mb-3"></i>
+                            <h4 class="card-title">5000+</h4>
+                            <p class="card-text">Active Citizens</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 d-flex">
+                    <div class="card text-center h-100 shadow-sm w-100">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <i class="fas fa-clock fa-3x text-primary mb-3"></i>
+                            <h4 class="card-title">24/7</h4>
+                            <p class="card-text">Real-time Tracking</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="container mb-5">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <h2 class="text-center mb-5">How CivicConnect Works</h2>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 80px; height: 80px;">
+                            <span class="text-white fw-bold fs-3">1</span>
+                        </div>
+                        <h4>Report Issues</h4>
+                        <p class="text-muted">Take photos, describe the problem, and submit your civic issue with location details.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 80px; height: 80px;">
+                            <span class="text-white fw-bold fs-3">2</span>
+                        </div>
+                        <h4>Track Progress</h4>
+                        <p class="text-muted">Monitor your issue status in real-time and receive updates from city officials.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <div class="bg-info rounded-circle d-inline-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 80px; height: 80px;">
+                            <span class="text-white fw-bold fs-3">3</span>
+                        </div>
+                        <h4>See Results</h4>
+                        <p class="text-muted">Watch as your community improves through collective civic engagement and action.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popular Categories -->
+        <div class="container mb-5">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <h2 class="text-center mb-5">Popular Issue Categories</h2>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 d-flex">
+                    <div class="card h-100 shadow-sm w-100">
+                        <div class="card-body text-center d-flex flex-column justify-content-center">
+                            <i class="fas fa-road fa-3x text-primary mb-3"></i>
+                            <h5>Infrastructure</h5>
+                            <p class="text-muted">Roads, bridges, sidewalks, and public facilities</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 d-flex">
+                    <div class="card h-100 shadow-sm w-100">
+                        <div class="card-body text-center d-flex flex-column justify-content-center">
+                            <i class="fas fa-leaf fa-3x text-success mb-3"></i>
+                            <h5>Environment</h5>
+                            <p class="text-muted">Pollution, waste management, and green spaces</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 d-flex">
+                    <div class="card h-100 shadow-sm w-100">
+                        <div class="card-body text-center d-flex flex-column justify-content-center">
+                            <i class="fas fa-shield-alt fa-3x text-warning mb-3"></i>
+                            <h5>Public Safety</h5>
+                            <p class="text-muted">Street lighting, security, and emergency services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 d-flex">
+                    <div class="card h-100 shadow-sm w-100">
+                        <div class="card-body text-center d-flex flex-column justify-content-center">
+                            <i class="fas fa-bus fa-3x text-info mb-3"></i>
+                            <h5>Transportation</h5>
+                            <p class="text-muted">Public transit, traffic signals, and parking</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="container mb-5">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card bg-primary text-white text-center">
+                        <div class="card-body py-5">
+                            <h2 class="mb-4">Ready to Make Your City Better?</h2>
+                            <p class="lead mb-4">Join thousands of citizens who are already making a difference in their communities.</p>
+                            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                                <a href="/user/login" class="btn btn-light btn-lg px-4">
+                                    <i class="fas fa-rocket me-2"></i>Start Reporting Issues
+                                </a>
+                                <a href="/features" class="btn btn-outline-light btn-lg px-4">
+                                    <i class="fas fa-info-circle me-2"></i>Learn More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

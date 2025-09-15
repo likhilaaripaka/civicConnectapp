@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Deleted Issues - Admin Dashboard</title>
+</head>
+<body>
+    <main>
+        <div class="container mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="text-danger">
+                    <i class="fas fa-trash-alt me-2"></i>
+                    Deleted Issues
+                </h2>
+                <a href="/admin-dashboard" class="btn btn-primary">
+                    <i class="fas fa-arrow-left me-1"></i>
+                    Back to Dashboard
+                </a>
+            </div>
+
+            <!-- Flash Messages -->
+            <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle me-2"></i>
+                <span th:text="${success}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <span th:text="${error}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <!-- Deleted Issues List -->
+            <div th:if="${#lists.isEmpty(deletedIssues)}" class="text-center py-5">
+                <i class="fas fa-archive fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No Deleted Issues</h4>
+                <p class="text-muted">Deleted issues will appear here for record keeping.</p>
+            </div>
+
+            <div th:if="${!#lists.isEmpty(deletedIssues)}" class="row">
+                <div th:each="issue : ${deletedIssues}" class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm border-danger">
+                        <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+                            <span class="badge bg-light text-danger" th:text="${issue.category}">Category</span>
+                            <small>
+                                <i class="fas fa-calendar me-1"></i>
+                                Deleted <span th:text="${#temporals.format(issue.deletedAt, 'MMM dd, yyyy')}">Date</span>
+                            </small>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title text-primary" th:text="${issue.title}">Issue Title</h6>
+                            <p class="card-text text-muted small mb-2">
+                                <i class="fas fa-map-marker-alt me-1"></i>
+                                <span th:text="${issue.location}">Location</span>
+                            </p>
+                            <p class="card-text" th:text="${#strings.abbreviate(issue.description, 80)}">Issue description...</p>
+                            
+                            <!-- Solution Info -->
+                            <div th:if="${issue.solutionDescription}" class="mt-2 p-2 bg-success bg-opacity-10 rounded">
+                                <small class="text-success">
+                                    <i class="fas fa-check-circle me-1"></i>
+                                    Was solved by <strong th:text="${issue.solvedByAdmin.name}">Admin</strong>
+                                </small>
+                                <p class="small mb-0 mt-1" th:text="${#strings.abbreviate(issue.solutionDescription, 60)}">Solution...</p>
+                            </div>
+                            
+                            <!-- Deletion Info -->
+                            <div class="mt-3 p-2 bg-danger bg-opacity-10 rounded">
+                                <small class="text-danger">
+                                    <i class="fas fa-user-shield me-1"></i>
+                                    Deleted by <strong th:text="${issue.deletedByAdmin.name}">Admin</strong>
+                                </small>
+                                <p class="small mb-0 mt-1" th:text="${#strings.abbreviate(issue.deletionReason, 80)}">Deletion reason...</p>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-info flex-fill" 
+                                        data-bs-toggle="modal" 
+                                        th:data-bs-target="'#detailModal' + ${issue.id}">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Detail Modal -->
+                    <div class="modal fade" th:id="'detailModal' + ${issue.id}" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title">
+                                        <i class="fas fa-trash-alt me-2"></i>
+                                        Deleted Issue Details
+                                    </h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h6 class="text-primary" th:text="${issue.title}">Issue Title</h6>
+                                    <p class="text-muted mb-2">
+                                        <i class="fas fa-map-marker-alt me-1"></i>
+                                        <span th:text="${issue.location}">Location</span>
+                                        <span class="ms-3">
+                                            <i class="fas fa-tag me-1"></i>
+                                            <span th:text="${issue.category}">Category</span>
+                                        </span>
+                                    </p>
+                                    <p th:text="${issue.description}">Full description...</p>
+                                    
+                                    <!-- Original Issue Images -->
+                                    <div th:if="${issue.imagePath}" class="mt-3">
+                                        <h6>Original Issue Photo:</h6>
+                                        <img th:src="@{'/uploads/' + ${issue.imagePath}}" 
+                                             alt="Issue Image" 
+                                             class="img-fluid rounded" 
+                                             style="max-height: 200px;">
+                                    </div>
+                                    
+                                    <!-- Solution Details -->
+                                    <div th:if="${issue.solutionDescription}" class="mt-4 p-3 bg-success bg-opacity-10 rounded">
+                                        <h6 class="text-success">
+                                            <i class="fas fa-check-circle me-1"></i>
+                                            Solution (by <span th:text="${issue.solvedByAdmin.name}">Admin</span>)
+                                        </h6>
+                                        <p th:text="${issue.solutionDescription}">Solution description...</p>
+                                        <div th:if="${issue.solutionImagePath}" class="mt-2">
+                                            <img th:src="@{'/uploads/' + ${issue.solutionImagePath}}" 
+                                                 alt="Solution Image" 
+                                                 class="img-fluid rounded" 
+                                                 style="max-height: 150px;">
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Deletion Details -->
+                                    <div class="mt-4 p-3 bg-danger bg-opacity-10 rounded">
+                                        <h6 class="text-danger">
+                                            <i class="fas fa-trash-alt me-1"></i>
+                                            Deletion Details
+                                        </h6>
+                                        <p><strong>Deleted by:</strong> <span th:text="${issue.deletedByAdmin.name}">Admin</span></p>
+                                        <p><strong>Deleted on:</strong> <span th:text="${#temporals.format(issue.deletedAt, 'MMM dd, yyyy HH:mm')}">Date</span></p>
+                                        <p><strong>Reason:</strong> <span th:text="${issue.deletionReason}">Deletion reason...</span></p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
