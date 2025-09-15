@@ -660,6 +660,30 @@
             margin: 0 auto;
         }
         
+        /* Force full width for all admin containers */
+        .container-fluid {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding-left: 15px !important;
+            padding-right: 15px !important;
+        }
+        
+        /* Admin dashboard specific full width fixes */
+        main.container-fluid {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            margin: 0 !important;
+            padding: 0 15px !important;
+        }
+        
+        /* Ensure all admin cards use full width */
+        .admin-dashboard .card,
+        .admin-dashboard .row,
+        .admin-dashboard .col-12 {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        
         .admin-stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -714,9 +738,34 @@
                 margin-top: 15px;
             }
             
+            /* Mobile viewport fixes for admin dashboard */
+            html, body {
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow-x: hidden !important;
+            }
+            
+            /* Force full width containers on mobile */
+            .container-fluid {
+                width: 100vw !important;
+                max-width: 100vw !important;
+                margin: 0 !important;
+                padding: 0 10px !important;
+            }
+            
+            main.container-fluid {
+                width: 100vw !important;
+                max-width: 100vw !important;
+                margin: 0 !important;
+                padding: 0 10px !important;
+            }
+            
             /* Admin Dashboard Mobile Specific */
             .admin-dashboard-container {
                 padding: 10px;
+                width: 100vw !important;
+                max-width: 100vw !important;
+                margin: 0 !important;
             }
             
             .admin-stats-grid {
@@ -796,17 +845,62 @@
         }
         
         @media (max-width: 480px) {
+            /* Force full viewport width on small screens */
+            html, body {
+                width: 100vw !important;
+                max-width: 100vw !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow-x: hidden !important;
+            }
+            
+            .container-fluid {
+                width: 100vw !important;
+                max-width: 100vw !important;
+                margin: 0 !important;
+                padding: 0 5px !important;
+            }
+            
+            main.container-fluid {
+                width: 100vw !important;
+                max-width: 100vw !important;
+                margin: 0 !important;
+                padding: 0 5px !important;
+            }
+            
             .admin-dashboard-container {
                 padding: 5px;
+                width: 100vw !important;
+                max-width: 100vw !important;
+                margin: 0 !important;
             }
             
             .admin-stats-grid {
                 gap: 10px;
+                width: 100% !important;
             }
             
             .admin-card-header,
             .admin-card-body {
                 padding: 10px;
+            }
+            
+            .admin-card {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 0 15px 0 !important;
+            }
+            
+            .row {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+            }
+            
+            .col-12, .col-lg-8, .col-lg-4, .col-md-6 {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 5px !important;
             }
             
             .table {
@@ -934,6 +1028,103 @@
             .admin-review-content p,
             .admin-review-content div {
                 font-size: 0.85rem;
+            }
+        }
+        
+        /* Mobile Issue Information Section Fix */
+        @media (max-width: 768px) {
+            /* Issue Information table-like layout fix */
+            .card-body .row {
+                margin: 0 !important;
+                width: 100% !important;
+            }
+            
+            .card-body .row .col-2,
+            .card-body .row .col-4 {
+                padding: 2px 5px !important;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            /* Stack issue info vertically on mobile */
+            .issue-info-mobile {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .issue-info-row {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                padding: 8px 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            
+            .issue-info-label {
+                font-weight: 600;
+                color: #666;
+                font-size: 0.9rem;
+                min-width: 80px;
+                margin-right: 10px;
+            }
+            
+            .issue-info-value {
+                flex: 1;
+                font-size: 0.9rem;
+                word-wrap: break-word;
+            }
+            
+            /* Badge adjustments for mobile */
+            .badge {
+                font-size: 0.75rem !important;
+                padding: 4px 8px !important;
+                white-space: nowrap;
+            }
+            
+            /* Button improvements */
+            .btn {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+                margin-bottom: 8px;
+                width: 100%;
+            }
+            
+            /* Card spacing improvements */
+            .card {
+                margin-bottom: 15px !important;
+            }
+            
+            .card-body {
+                padding: 15px !important;
+            }
+            
+            .card-header {
+                padding: 10px 15px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .issue-info-label {
+                font-size: 0.8rem;
+                min-width: 70px;
+            }
+            
+            .issue-info-value {
+                font-size: 0.8rem;
+            }
+            
+            .card-body {
+                padding: 10px !important;
+            }
+            
+            .card-header {
+                padding: 8px 10px !important;
+            }
+            
+            .btn {
+                font-size: 0.8rem;
+                padding: 6px 12px;
             }
         }
         </style>
