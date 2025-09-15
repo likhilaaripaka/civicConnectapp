@@ -595,6 +595,80 @@
             resize: vertical;
             min-height: 100px;
         }
+        
+        /* Fix issue detail section headings in dashboards */
+        .card-body .issue-detail-section h5,
+        .dashboard-content .issue-detail-section h5,
+        .issue-detail-body h5 {
+            width: 100%;
+            text-align: left;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+            display: block;
+            clear: both;
+        }
+        
+        /* Title/Location section height matching with button section */
+        .title-location-section {
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .button-section {
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        
+        /* Eye icon positioning fix for admin login */
+        .password-field-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .password-toggle-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 10;
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+        
+        .password-field-container input[type="password"],
+        .password-field-container input[type="text"] {
+            padding-right: 45px !important;
+        }
+        
+        @media (max-width: 768px) {
+            .card-body .issue-detail-section h5,
+            .dashboard-content .issue-detail-section h5,
+            .issue-detail-body h5 {
+                font-size: 1.1rem;
+            }
+            
+            .title-location-section,
+            .button-section {
+                min-height: 100px;
+            }
+            
+            .button-section {
+                align-items: center;
+                margin-top: 15px;
+            }
+        }
         </style>
     </head>
     <body>

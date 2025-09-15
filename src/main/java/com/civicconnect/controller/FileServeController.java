@@ -28,11 +28,13 @@ public class FileServeController {
         try {
             System.out.println("=== MEMORY FILE CONTROLLER ===");
             System.out.println("Requested filename: " + filename);
+            System.out.println("Current storage size: " + fileStorage.size());
+            System.out.println("Available files: " + fileStorage.keySet());
             
             FileInfo fileInfo = fileStorage.get(filename);
             
             if (fileInfo != null) {
-                System.out.println("File found in memory:");
+                System.out.println("✅ File found in memory:");
                 System.out.println("- Filename: " + filename);
                 System.out.println("- Content Type: " + fileInfo.contentType);
                 System.out.println("- File Size: " + fileInfo.data.length + " bytes");
@@ -42,12 +44,18 @@ public class FileServeController {
                         .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + filename + "\"")
                         .body(fileInfo.data);
             } else {
-                System.err.println("File not found in memory: " + filename);
-                System.out.println("Available files: " + fileStorage.keySet());
-                return ResponseEntity.notFound().build();
+                System.err.println("❌ File not found in memory: " + filename);
+                System.err.println("❌ This file was likely uploaded before the latest deployment");
+                System.err.println("❌ Available files in current session: " + fileStorage.keySet());
+                
+                // Return a placeholder response instead of 404 for better UX
+                String placeholderMessage = "File not available - please re-upload";
+                return ResponseEntity.ok()
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .body(placeholderMessage.getBytes());
             }
         } catch (Exception e) {
-            System.err.println("Error serving file from memory: " + e.getMessage());
+            System.err.println("❌ Error serving file from memory: " + e.getMessage());
             e.printStackTrace();
             return ResponseEntity.notFound().build();
         }
