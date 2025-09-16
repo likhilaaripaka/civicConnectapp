@@ -41,10 +41,10 @@
             
             html, body {
                 width: 100vw !important;
-                height: 100vh !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 overflow-x: hidden !important;
+                min-height: 100vh !important;
             }
             
             .container, .container-fluid, .row, .col-12, .col-md-6, .col-lg-4, .col-md-5, .col-md-2 {
@@ -393,13 +393,11 @@
             
             main {
                 flex: 1 !important;
-                overflow-y: auto !important;
                 padding: 5px !important;
                 margin: 0 !important;
             }
             
             footer {
-                flex-shrink: 0 !important;
                 padding: 15px 5px !important;
                 margin: 0 !important;
             }
@@ -512,13 +510,11 @@
             
             main {
                 flex: 1 !important;
-                overflow-y: auto !important;
                 padding: 10px !important;
                 margin: 0 !important;
             }
             
             footer {
-                flex-shrink: 0 !important;
                 padding: 20px 10px !important;
                 margin: 0 !important;
             }
@@ -1726,7 +1722,7 @@
         }
         </style>
     </head>
-    <body th:fragment="layout(title, content)" class="d-flex flex-column min-vh-100" style="width: 100vw !important; height: 100vh !important; margin: 0 !important; padding: 0 !important; overflow-x: hidden !important;">
+    <body th:fragment="layout(title, content)" class="d-flex flex-column" style="width: 100vw !important; margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; min-height: 100vh !important;">
         <!-- Header -->
         <nav class="navbar navbar-expand-lg navbar-dark" style="background: var(--gradient-primary);">
             <div class="container">
@@ -1757,11 +1753,11 @@
             </nav>
 
             <!-- Main Content -->
-            <main class="flex-grow-1" th:insert="${content}" style="flex: 1 !important; overflow-y: auto !important; overflow-x: hidden !important; height: calc(100vh - 140px) !important; margin: 0 !important; padding: 10px !important;">
+            <main class="flex-grow-1" th:insert="${content}" style="flex: 1 !important; overflow-x: hidden !important; margin: 0 !important; padding: 10px !important;">
             </main>
 
             <!-- Footer -->
-            <footer class="bg-dark text-white py-4 mt-auto full-width-footer" style="height: 140px !important; flex-shrink: 0 !important; overflow: hidden !important; margin: 0 !important; padding: 20px 0 !important;">
+            <footer class="bg-dark text-white py-4 mt-auto full-width-footer" style="margin: 0 !important; padding: 20px 0 !important;">
                 <div class="container-fluid py-4">
                     <div class="row">
                         <div class="col-md-4 text-start" style="padding-left: 20px;">

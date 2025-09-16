@@ -69,26 +69,25 @@
         @media screen and (max-width: 480px) {
             html, body {
                 width: 100vw !important;
-                height: 100vh !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 overflow-x: hidden !important;
+                min-height: 100vh !important;
             }
             
             body {
-                display: flex !important;
-                flex-direction: column !important;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
             }
             
             main {
                 flex: 1 !important;
-                overflow-y: auto !important;
                 padding: 5px !important;
                 margin: 0 !important;
             }
             
             footer {
-                flex-shrink: 0 !important;
                 padding: 15px 5px !important;
                 margin: 0 !important;
             }
