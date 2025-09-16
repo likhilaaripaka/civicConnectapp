@@ -25,9 +25,37 @@
             width: 100vw !important;
             margin-left: calc(-50vw + 50%) !important;
         }
+        
+        /* Mobile White Space Fix for Admin Dashboard */
+        @media screen and (max-width: 768px) {
+            html, body {
+                height: 100vh !important;
+                overflow-x: hidden !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            body {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            
+            main {
+                flex: 1 !important;
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                margin: 0 !important;
+                padding: 10px !important;
+            }
+            
+            footer {
+                flex-shrink: 0 !important;
+                margin-top: 0 !important;
+            }
+        }
     </style>
 </head>
-<body>
+<body style="height: 100vh; display: flex; flex-direction: column; margin: 0; padding: 0;"
     <!-- Custom navbar for admin dashboard -->
     <nav class="navbar navbar-expand-lg navbar-dark dashboard-navbar" style="background: var(--gradient-primary);">
         <div class="container">
@@ -60,7 +88,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main>
+    <main style="flex: 1; overflow-y: auto; overflow-x: hidden; margin: 0; padding: 10px;">
         <div class="container mt-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
@@ -269,7 +297,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4 mt-auto full-width-footer">
+    <footer class="bg-dark text-white py-4 mt-auto full-width-footer" style="flex-shrink: 0; margin-top: 0;">
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-md-4 text-start" style="padding-left: 20px;">
