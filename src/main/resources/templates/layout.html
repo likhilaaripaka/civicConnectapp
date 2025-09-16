@@ -70,6 +70,74 @@
                 width: 100% !important;
                 margin-bottom: 2px !important;
             }
+            
+            /* Citizen Dashboard specific fixes */
+            .dashboard-header {
+                width: 100% !important;
+                padding: 0 8px !important;
+            }
+            
+            .dashboard-tabs .nav-tabs {
+                flex-direction: column !important;
+                width: 100% !important;
+            }
+            
+            .dashboard-tabs .nav-link {
+                width: 100% !important;
+                text-align: center !important;
+                margin-bottom: 5px !important;
+            }
+            
+            .search-section, .filter-section {
+                width: 100% !important;
+                margin-bottom: 10px !important;
+            }
+            
+            .search-section .row, .filter-section .row {
+                margin: 0 !important;
+                width: 100% !important;
+            }
+            
+            .search-section .col-md-8, .search-section .col-md-4,
+            .filter-section .col-md-5, .filter-section .col-md-2 {
+                width: 100% !important;
+                max-width: 100% !important;
+                flex: 0 0 100% !important;
+                padding: 0 4px !important;
+                margin-bottom: 8px !important;
+            }
+            
+            .issues-table-section {
+                width: 100% !important;
+                overflow-x: auto !important;
+            }
+            
+            .table-responsive {
+                width: 100% !important;
+                overflow-x: auto !important;
+            }
+            
+            .table {
+                width: 100% !important;
+                font-size: 0.75rem !important;
+            }
+            
+            .table th, .table td {
+                padding: 4px 2px !important;
+                white-space: nowrap !important;
+                font-size: 0.7rem !important;
+            }
+            
+            /* Action buttons in citizen dashboard */
+            .btn-group {
+                flex-direction: column !important;
+                width: 100% !important;
+            }
+            
+            .btn-group .btn {
+                width: 100% !important;
+                margin-bottom: 3px !important;
+            }
         }
         
         .navbar {
@@ -1684,27 +1752,8 @@
                             <a class="nav-link" href="/user/login">Login</a>
                         </li>
                     </ul>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/features">Features</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/about">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/user/login">Login</a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
+            </div>
             </nav>
 
             <!-- Main Content -->
