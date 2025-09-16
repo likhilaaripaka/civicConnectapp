@@ -301,24 +301,89 @@
             .container, .container-fluid {
                 padding: 0 8px !important;
                 width: 100% !important;
+                max-width: 100% !important;
             }
             
             .card {
                 margin-bottom: 10px !important;
                 border-radius: 8px !important;
+                width: 100% !important;
+                max-width: 100% !important;
             }
             
             .card-body {
                 padding: 12px !important;
+                width: 100% !important;
             }
             
             .row {
                 margin: 0 !important;
+                width: 100% !important;
             }
             
-            .col-12, .col-md-6, .col-lg-4 {
+            .col-12, .col-md-6, .col-lg-4, .col-md-5, .col-md-2 {
                 padding: 0 4px !important;
                 margin-bottom: 10px !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                flex: 0 0 100% !important;
+            }
+            
+            /* Force dashboard navigation tabs to stack */
+            .nav-tabs {
+                flex-direction: column !important;
+                width: 100% !important;
+            }
+            
+            .nav-tabs .nav-link {
+                width: 100% !important;
+                margin: 0 0 2px 0 !important;
+                text-align: center !important;
+            }
+            
+            /* Search and filter sections */
+            .form-select, .form-control {
+                width: 100% !important;
+                margin-bottom: 8px !important;
+            }
+            
+            /* Dashboard header buttons */
+            .d-flex.justify-content-between {
+                flex-direction: column !important;
+                align-items: stretch !important;
+            }
+            
+            .d-flex.gap-2 {
+                flex-direction: column !important;
+                gap: 5px !important;
+                width: 100% !important;
+            }
+            
+            .d-flex.gap-2 .btn {
+                width: 100% !important;
+                margin-bottom: 5px !important;
+            }
+            
+            /* Issue cards in dashboard */
+            .card.h-100 {
+                height: auto !important;
+                margin-bottom: 10px !important;
+            }
+            
+            /* Table responsive */
+            .table-responsive {
+                overflow-x: auto !important;
+                width: 100% !important;
+            }
+            
+            .table {
+                font-size: 0.8rem !important;
+                width: 100% !important;
+            }
+            
+            .table th, .table td {
+                padding: 6px 4px !important;
+                white-space: nowrap !important;
             }
         }
         
@@ -355,24 +420,72 @@
             .container, .container-fluid {
                 padding: 0 12px !important;
                 width: 100% !important;
+                max-width: 100% !important;
             }
             
             .card {
                 margin-bottom: 15px !important;
                 border-radius: 10px !important;
+                width: 100% !important;
+                max-width: 100% !important;
             }
             
             .card-body {
                 padding: 16px !important;
+                width: 100% !important;
             }
             
             .row {
                 margin: 0 !important;
+                width: 100% !important;
             }
             
-            .col-12, .col-md-6, .col-lg-4 {
+            .col-12, .col-md-6, .col-lg-4, .col-md-5, .col-md-2 {
                 padding: 0 6px !important;
                 margin-bottom: 15px !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                flex: 0 0 100% !important;
+            }
+            
+            /* Navigation tabs for medium screens */
+            .nav-tabs {
+                flex-wrap: wrap !important;
+                width: 100% !important;
+            }
+            
+            .nav-tabs .nav-link {
+                flex: 1 !important;
+                min-width: 120px !important;
+                text-align: center !important;
+            }
+            
+            /* Form elements */
+            .form-select, .form-control {
+                width: 100% !important;
+                margin-bottom: 10px !important;
+            }
+            
+            /* Dashboard buttons */
+            .d-flex.gap-2 {
+                flex-wrap: wrap !important;
+                gap: 8px !important;
+                width: 100% !important;
+            }
+            
+            .d-flex.gap-2 .btn {
+                flex: 1 !important;
+                min-width: 120px !important;
+            }
+            
+            /* Tables */
+            .table {
+                font-size: 0.9rem !important;
+                width: 100% !important;
+            }
+            
+            .table th, .table td {
+                padding: 8px 6px !important;
             }
         }
         
