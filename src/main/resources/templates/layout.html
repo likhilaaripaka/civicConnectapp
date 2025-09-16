@@ -45,6 +45,30 @@
                 padding: 0 !important;
                 overflow-x: hidden !important;
                 min-height: 100vh !important;
+                height: auto !important;
+            }
+            
+            body {
+                display: flex !important;
+                flex-direction: column !important;
+                min-height: 100vh !important;
+            }
+            
+            main {
+                flex: 1 !important;
+                width: 100% !important;
+                overflow-y: visible !important;
+                height: auto !important;
+                min-height: auto !important;
+            }
+            
+            footer {
+                position: relative !important;
+                bottom: auto !important;
+                width: 100% !important;
+                height: auto !important;
+                flex-shrink: 0 !important;
+                margin-top: auto !important;
             }
             
             .container, .container-fluid, .row, .col-12, .col-md-6, .col-lg-4, .col-md-5, .col-md-2 {
@@ -379,14 +403,16 @@
         @media screen and (max-width: 480px) {
             html, body {
                 width: 100vw !important;
-                height: 100vh !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 overflow-x: hidden !important;
+                min-height: 100vh !important;
+                height: auto !important;
             }
             
             .min-vh-100, .d-flex.flex-column.min-vh-100 {
-                height: 100vh !important;
+                min-height: 100vh !important;
+                height: auto !important;
                 display: flex !important;
                 flex-direction: column !important;
             }
@@ -395,11 +421,17 @@
                 flex: 1 !important;
                 padding: 5px !important;
                 margin: 0 !important;
+                height: auto !important;
+                overflow-y: visible !important;
             }
             
             footer {
                 padding: 15px 5px !important;
                 margin: 0 !important;
+                position: relative !important;
+                height: auto !important;
+                flex-shrink: 0 !important;
+                margin-top: auto !important;
             }
             
             /* Dashboard sections for small screens */
@@ -496,14 +528,16 @@
         @media screen and (min-width: 481px) and (max-width: 768px) {
             html, body {
                 width: 100vw !important;
-                height: 100vh !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 overflow-x: hidden !important;
+                min-height: 100vh !important;
+                height: auto !important;
             }
             
             .min-vh-100, .d-flex.flex-column.min-vh-100 {
-                height: 100vh !important;
+                min-height: 100vh !important;
+                height: auto !important;
                 display: flex !important;
                 flex-direction: column !important;
             }
@@ -512,11 +546,17 @@
                 flex: 1 !important;
                 padding: 10px !important;
                 margin: 0 !important;
+                height: auto !important;
+                overflow-y: visible !important;
             }
             
             footer {
                 padding: 20px 10px !important;
                 margin: 0 !important;
+                position: relative !important;
+                height: auto !important;
+                flex-shrink: 0 !important;
+                margin-top: auto !important;
             }
             
             /* Dashboard sections for medium screens */
