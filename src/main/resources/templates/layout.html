@@ -266,31 +266,51 @@
             margin-left: calc(-50vw + 50%) !important;
         }
         
-        /* Mobile White Space Fix - Override Bootstrap */
-        @media (max-width: 768px) {
-            html, body {
-                height: 100% !important;
+        /* URGENT Mobile White Space Fix - Force Override */
+        @media screen and (max-width: 768px) {
+            html {
+                height: 100vh !important;
+                overflow: hidden !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                overflow-x: hidden !important;
             }
             
-            /* Remove min-vh-100 effect on mobile */
-            .min-vh-100 {
-                min-height: auto !important;
-                height: 100vh !important;
-                max-height: 100vh !important;
-            }
-            
-            /* Force body to not extend beyond viewport */
             body {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                bottom: 0 !important;
+                height: 100vh !important;
+                overflow: hidden !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                position: relative !important;
+            }
+            
+            /* Kill min-vh-100 completely */
+            .min-vh-100, 
+            .d-flex.flex-column.min-vh-100 {
+                min-height: 100vh !important;
+                max-height: 100vh !important;
+                height: 100vh !important;
+                overflow: hidden !important;
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            
+            /* Main scrollable area */
+            main {
+                flex: 1 !important;
                 overflow-y: auto !important;
                 overflow-x: hidden !important;
+                height: calc(100vh - 140px) !important;
+                margin: 0 !important;
+                padding: 10px !important;
+            }
+            
+            /* Fixed footer */
+            footer {
+                height: 140px !important;
+                flex-shrink: 0 !important;
+                overflow: hidden !important;
+                margin: 0 !important;
+                padding: 20px 0 !important;
             }
         }
         
