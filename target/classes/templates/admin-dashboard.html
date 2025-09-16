@@ -25,9 +25,184 @@
             width: 100vw !important;
             margin-left: calc(-50vw + 50%) !important;
         }
+        
+        /* Mobile Responsive Design for Admin Dashboard - Multiple Screen Sizes */
+        
+        /* Small Mobile Phones (320px - 480px) */
+        @media screen and (max-width: 480px) {
+            html, body {
+                width: 100vw !important;
+                height: 100vh !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow-x: hidden !important;
+            }
+            
+            body {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            
+            main {
+                flex: 1 !important;
+                overflow-y: auto !important;
+                padding: 5px !important;
+                margin: 0 !important;
+            }
+            
+            footer {
+                flex-shrink: 0 !important;
+                padding: 15px 5px !important;
+                margin: 0 !important;
+            }
+            
+            /* Admin dashboard sections for small screens */
+            .container {
+                padding: 0 8px !important;
+                width: 100% !important;
+            }
+            
+            .card {
+                margin-bottom: 10px !important;
+                border-radius: 8px !important;
+            }
+            
+            .card-body {
+                padding: 12px !important;
+            }
+            
+            .card-header {
+                padding: 10px 12px !important;
+                font-size: 0.9rem !important;
+            }
+            
+            .row {
+                margin: 0 !important;
+            }
+            
+            .col-md-6, .col-lg-4 {
+                padding: 0 4px !important;
+                margin-bottom: 10px !important;
+            }
+            
+            .btn {
+                font-size: 0.8rem !important;
+                padding: 6px 10px !important;
+                margin-bottom: 5px !important;
+            }
+            
+            .d-flex.gap-2 {
+                flex-direction: column !important;
+                gap: 5px !important;
+            }
+            
+            .d-flex.gap-2 .btn {
+                width: 100% !important;
+            }
+            
+            h2 {
+                font-size: 1.3rem !important;
+            }
+            
+            h4 {
+                font-size: 1.1rem !important;
+            }
+            
+            h5 {
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* Medium Mobile Phones (481px - 768px) */
+        @media screen and (min-width: 481px) and (max-width: 768px) {
+            html, body {
+                width: 100vw !important;
+                height: 100vh !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow-x: hidden !important;
+            }
+            
+            body {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            
+            main {
+                flex: 1 !important;
+                overflow-y: auto !important;
+                padding: 10px !important;
+                margin: 0 !important;
+            }
+            
+            footer {
+                flex-shrink: 0 !important;
+                padding: 20px 10px !important;
+                margin: 0 !important;
+            }
+            
+            /* Admin dashboard sections for medium screens */
+            .container {
+                padding: 0 12px !important;
+                width: 100% !important;
+            }
+            
+            .card {
+                margin-bottom: 15px !important;
+                border-radius: 10px !important;
+            }
+            
+            .card-body {
+                padding: 16px !important;
+            }
+            
+            .card-header {
+                padding: 12px 16px !important;
+            }
+            
+            .row {
+                margin: 0 !important;
+            }
+            
+            .col-md-6, .col-lg-4 {
+                padding: 0 6px !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .btn {
+                font-size: 0.9rem !important;
+                padding: 8px 12px !important;
+            }
+            
+            .d-flex.gap-2 {
+                flex-wrap: wrap !important;
+                gap: 8px !important;
+            }
+        }
+        
+        /* Large Mobile/Small Tablets (769px - 991px) */
+        @media screen and (min-width: 769px) and (max-width: 991px) {
+            .container {
+                padding: 0 15px !important;
+                width: 100% !important;
+            }
+            
+            .card {
+                margin-bottom: 20px !important;
+            }
+            
+            .card-body {
+                padding: 20px !important;
+            }
+            
+            .col-md-6, .col-lg-4 {
+                padding: 0 8px !important;
+                margin-bottom: 20px !important;
+            }
+        }
     </style>
 </head>
-<body>
+<body style="height: 100vh; display: flex; flex-direction: column; margin: 0; padding: 0;"
     <!-- Custom navbar for admin dashboard -->
     <nav class="navbar navbar-expand-lg navbar-dark dashboard-navbar" style="background: var(--gradient-primary);">
         <div class="container">
@@ -60,7 +235,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main>
+    <main style="flex: 1; overflow-y: auto; overflow-x: hidden; margin: 0; padding: 10px;">
         <div class="container mt-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
@@ -269,7 +444,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4 mt-auto full-width-footer">
+    <footer class="bg-dark text-white py-4 mt-auto full-width-footer" style="flex-shrink: 0; margin-top: 0;">
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-md-4 text-start" style="padding-left: 20px;">
