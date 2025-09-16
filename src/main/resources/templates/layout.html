@@ -1424,7 +1424,7 @@
         </style>
     </head>
     <body>
-        <div th:fragment="layout (title, content)" class="d-flex flex-column min-vh-100">
+        <div th:fragment="layout (title, content)" class="d-flex flex-column min-vh-100" style="height: 100vh !important; max-height: 100vh !important; overflow: hidden !important;">
             <!-- Header -->
             <nav class="navbar navbar-expand-lg navbar-dark" style="background: var(--gradient-primary);">
                 <div class="container">
@@ -1455,11 +1455,11 @@
             </nav>
 
             <!-- Main Content -->
-            <main class="flex-grow-1" th:insert="${content}">
+            <main class="flex-grow-1" th:insert="${content}" style="flex: 1 !important; overflow-y: auto !important; overflow-x: hidden !important; height: calc(100vh - 140px) !important; margin: 0 !important; padding: 10px !important;">
             </main>
 
             <!-- Footer -->
-            <footer class="bg-dark text-white py-4 mt-auto full-width-footer">
+            <footer class="bg-dark text-white py-4 mt-auto full-width-footer" style="height: 140px !important; flex-shrink: 0 !important; overflow: hidden !important; margin: 0 !important; padding: 20px 0 !important;">
                 <div class="container-fluid py-4">
                     <div class="row">
                         <div class="col-md-4 text-start" style="padding-left: 20px;">
